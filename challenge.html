@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>carefully avoiding any mention of my possible future employer</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&family=Poppins:ital,wght@0,200;0,300;0,400;1,200;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+</head>
+<body>
+  <div class="header-background">
+    <h1 class="header-in-banner">Welcome aboard! Please follow the instruction of the crew!</h1>
+  </div>
+  <div class = "banner">
+    <h3 class="subheader-in-banner">Please fill in the boundary box! <br> 
+      Then confirm your input and check your data. <br>
+      If the data is correct please press Submit. (Use "." and not ",") <br>
+      The names of all features of a specfic location will be displayed below. <br>
+      In case you do not know any boundry box data, try this one: <br>
+      left: 11.54, bottom: 48.14, right: 11.543, top: 48.145 </h3>
+    <form action="" class= "form" id="form-id">
+      <div class="form-item">
+        <input type="text" id="left" class="form-input" placeholder="left side" aria-label="left side">
+      </div>
+      <div class="form-item">
+        <input type="text" id="bottom" class="form-input" placeholder="bottom side" aria-label="bottom side">
+      </div>
+      <div class="form-item">
+        <input type="text" id="right" class="form-input" placeholder="right side" aria-label="right side">
+      </div>
+      <div class="form-item">
+        <input type="text" id="top" class="form-input" placeholder="top side" aria-label="top side">
+      </div>
+        <button id= "submit" class="form-button">Confirm</button>
+    </form>
+    <div class="display-input">
+      <div class="form-item">
+        <li id="left-display" class="form-input">-</li>
+      </div>
+      <div class="form-item">
+        <li id="bottom-display" class="form-input">-</li>
+      </div>
+      <div class="form-item">
+        <li id="right-display" class="form-input">-</li>
+      </div>
+      <div class="form-item">
+        <li id="top-display" class="form-input">-</li>
+      </div>
+      <button id="magic" class="form-button"> Submit </button>
+    </div>
+  </div>
+  <div class="container">
+    <div id="display-grid-data"> </div>
+  </div>
+
+
+<script src='osmtogeojson.js'></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+
+  /* Defining all variables here */
+  let left = document.getElementById("left")
+  let bottom = document.getElementById("bottom")
+  let right = document.getElementById("right")
+  let above = document.getElementById("top")
+  let magic = document.getElementById("magic")
+
+  let leftDisplay = document.getElementById('left-display')
+  let bottomDisplay = document.getElementById('bottom-display')
+  let rightDisplay = document.getElementById('right-display')
+  let topDisplay = document.getElementById('top-display')
+  let displayName = document.getElementById('display-grid-data')
+
+
+  /* Preparing the data for confirmation. Redundancies are important in Aviation */
+  document.getElementById("submit").addEventListener("click", function(event){
+    event.preventDefault();
+    leftDisplay.innerHTML = left.value;
+    bottomDisplay.innerHTML = bottom.value;
+    rightDisplay.innerHTML = right.value;
+    topDisplay.innerHTML = above.value;
+  })
+
+  /* This is where the magic happens! */
+  magic.addEventListener("click", function(){
+    axios
+      /* making the API call */
+      .get(`https://api.openstreetmap.org/api/0.6/map?bbox=${leftDisplay.innerHTML},${bottomDisplay.innerHTML},${rightDisplay.innerHTML},${topDisplay.innerHTML}`)
+      .then(response => {
+        /* turning the data into geojson */
+        let array = (osmtogeojson(response.data))
+        /* Using super advanced and not at all baby-step-code to get the data from the geojson that i want */
+        let newArray = array.features
+        let properties = []
+        let finalArray = []
+        newArray.forEach(f => properties.push((f.properties)))
+        properties.forEach(function(n) {
+          if (n.name)
+            finalArray.push(n.name)
+            console.log(finalArray)
+        })
+        /* displaying the data on my site */
+        finalArray.forEach(function(p) {
+          newListItem = document.createElement("li");
+          newListItem.setAttribute("class", "grid-item");
+          newListItem.innerHTML = p;
+          displayName.appendChild(newListItem);
+});
+      })
+        .catch(error => console.error(error));
+});
+
+</script>
+
+</body>
+</html>

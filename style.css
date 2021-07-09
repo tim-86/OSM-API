@@ -1,0 +1,213 @@
+
+/* Body and css-variable definition */
+.body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  --clr: rgb(75, 75, 121);
+  --typewriterSpeed: 8s;
+}
+
+
+
+/* This is for the Typing animation */
+.header-background {
+  background: black;
+  height: 15vh;
+  width: 100%;
+  padding-top: 20px;
+}
+
+.header-in-banner {
+  position: relative;
+  color: white;
+  font-family: "Poppins";
+  width: max-content;
+}
+
+.header-in-banner::before,
+.header-in-banner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.header-in-banner::after {
+  width: 0.125em;
+  background: white;
+  animation: 
+  typewriter var(--typewriterSpeed) steps(59) 1s forwards,
+  blink 500ms steps(59) infinite;
+
+}
+.header-in-banner::before {
+  background: black;
+  animation: typewriter var(--typewriterSpeed) steps(59) 1s forwards;
+}
+
+@keyframes typewriter {
+  to {
+    left:100%;
+  }
+}
+
+@keyframes blink {
+  to {
+    background: transparent;
+  }
+}
+
+
+
+/* This is for the Banner and the Subheader fade in animation */
+.banner {
+  width: 100%;
+  height: 80vh;
+  background-image: url("images/bg0.jpg");;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.subheader-in-banner {
+  color: white;
+  font-family: "Poppins", sans-serif;
+  opacity: 0;
+  transform: translateY(3rem);
+  animation: fadeinUp 2s ease calc(var(--typewriterSpeed) + 2s)forwards;
+  position: absolute;
+  left: 20%;
+  top: 10%;
+  text-shadow: 0 20px 40px rgba(0,0,0, 0.5);
+}
+
+
+@keyframes fadeinUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+/* Form and Data-Display Styling */
+.form { 
+  display:flex;
+  flex-direction: column;
+  box-shadow: 0 0 30px rgba(0,0,0, 0.2);
+  border-radius: 20px;
+  overflow: hidden;
+  width:30%;
+  max-width: 300px;
+}
+
+#form-id {
+  position: absolute;
+  left: 20%;
+  bottom: 5%;
+}
+
+.form-item {
+  display:flex;
+  flex-direction: column;
+  text-decoration: none;
+  list-style: none;
+  background: white;
+}
+
+.form-input {
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 1px;
+    border: 0;
+    padding: 1.5em;
+}
+
+.form-button {
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 1px;
+  border: 0;
+  background: var(--clr);
+  color: white;
+  padding: 1em 2em;
+  transition: 0.3s;
+}
+
+.form-button:hover {
+  background: rgb(53, 53, 92)
+}
+
+.form-input {
+  padding: 1.5em;
+  border-bottom: 1px solid rgba(0,0,0, 0.1);
+  font-family: "Poppins";
+}
+
+.form-input::placeholder {
+  opacity: 0.4;
+}
+
+.form-input:focus::placeholder {
+  color: var(--clr);
+  opacity: 0.85;
+  border: 0;
+}
+
+.display-input{
+  width: 6%;
+  position: absolute;
+  right: 45%;
+  bottom: 5%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+/* Could have used a class here for less code */
+#left-display {
+  width: 100%;
+}
+
+#right-display {
+  width: 100%;
+}
+
+#bottom-display {
+  width: 100%;
+}
+
+#top-display {
+  width: 100%;
+}
+
+
+
+/* Displaying the Data in a grid */
+#display-grid-data {
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.grid-item {
+  font-family: "Poppins";
+  display: flex;
+  box-shadow: 8px 4px 4px rgba(200, 200, 200, 0.6);
+  margin: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  border-left: 1px solid rgba(200, 200, 200, 0.6);
+  border-top: 1px solid rgba(200, 200, 200, 0.6);
+}
+
+.item-name {
+  list-style-type: none;
+}
