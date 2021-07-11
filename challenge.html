@@ -14,10 +14,10 @@
   <div class="header-background">
     <h1 class="header-in-banner">Welcome aboard! Please follow the instruction of the crew!</h1>
   </div>
-  <div class = "banner">
+  <div class = "banner" style="background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)), url(images/bg0.jpg)">
     <h3 class="subheader-in-banner">Please fill in the boundary box! <br> 
       Then confirm your input and check your data. <br>
-      If the data is correct please press Submit. (Use "." and not ",") <br>
+      If the data is correct please press Submit. <br>
       The names of all features of a specfic location will be displayed  below. <br>
       In case you do not know any boundry box data, try this one: <br>
       left: 11.54, bottom: 48.14, right: 11.543, top: 48.145 </h3>
@@ -78,10 +78,10 @@
   /* Preparing the data for confirmation. Redundancies are important in Aviation */
   document.getElementById("submit").addEventListener("click", function(event){
     event.preventDefault();
-    leftDisplay.innerHTML = left.value;
-    bottomDisplay.innerHTML = bottom.value;
-    rightDisplay.innerHTML = right.value;
-    topDisplay.innerHTML = above.value;
+    leftDisplay.innerHTML = left.value.replace(/,/g, '.');
+    bottomDisplay.innerHTML = bottom.value.replace(/,/g, '.');
+    rightDisplay.innerHTML = right.value.replace(/,/g, '.');
+    topDisplay.innerHTML = above.value.replace(/,/g, '.');
   })
 
   /* This is where the magic happens! */
