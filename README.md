@@ -9,5 +9,7 @@ So i iterate over the GeoJSON and filter out all names (excluding the nameless f
 This is all done in JS although my main language is JS, hence the code might be a little bit rough around the edges.
 I decided as a frontend theme to add a little aviation humor, use similar border radius and the same font as the site of the company that gave me this challenge. 
 
+Please explore and have a look here: https://tim-86.github.io/OSM-API/
+
 I hope you enjoy this :)
 
