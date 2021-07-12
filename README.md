@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-# osmchallenge.github.io
-=======
+
 # OSM-API
 Calling the OSM-API and displaying selected data
 
@@ -13,4 +11,3 @@ I decided as a frontend theme to add a little aviation humor, use similar border
 
 I hope you enjoy this :)
 
->>>>>>> 32e166f18623e8a19e17903ab1470f4093ac0bc7
